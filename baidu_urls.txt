@@ -1,1 +1,3 @@
+ltao6688.github.io/2020/08/31/java-io-er-zi-jie-liu-outputstream/
+ltao6688.github.io/2020/08/08/java-io-yi-zi-jie-liu-inputstream/
 ltao6688.github.io/2020/08/03/hexo-github-da-jian-bo-ke/
