@@ -831,7 +831,7 @@
 </ul>
 <p>先来回答第一个问题。char 一定是两个字节吗?不是的，这个跟我们选用的字符编码有关，如果采用 ”ISO-8859-1” 编码，那么一个 char 只会有一个字节。如果采用 ”UTF-8” 或者  “GB2312”、“GBK”  等编码格式呢?这几种编码格式采用的是动态长度的，如果是英文字符，大家都是一个字节。如果是中文，”UTF-8” 是三个字，而  ”GBK”  和  ”GB2312”  是两个字节。而对于  ”unicode”  而言，无论如何都是两个字节。 然后再回答第二个问题，对于一个 char 如果用  ”ISO-8859-1”  来存储的话，肯定无法存储一个中文，而对于 ”UTF-8”、“GB2312”、“GBK”  而言大多数中文字符是可以存储的。</p>
 <h1 id="InputStream"><a href="#InputStream" class="headerlink" title="InputStream"></a>InputStream</h1><p>来看一下类的继承图：</p>
-<p><a href="https://imgchr.com/i/dXWUTH" target="_blank" rel="noopener"><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://s1.ax1x.com/2020/08/31/dXWUTH.png" alt="dXWUTH.png"></a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ltao6688/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://raw.githubusercontent.com/ltao6688/blogPic/master/blog/img/20200901222908.png" alt="类的继承图"></p>
 <p>事实上，由于 InputStream 是整个继承体系中的顶层类，同时根据数据源的不同，每一种数据源都从InputStream 派生了子类，导致了整个 IO 体系的庞大。但是，虽然整个继承体系很庞大，它还是有迹可循的。做过关于IO操作的读者知道，我们很少单独使用哪个类来实现 IO 操作，平时都是几个类合起来使用，这其实体现了一种装饰器模式 (<em>Decorator pattern</em>)。</p>
 <p>例如，输入流在默认情况下是不被缓冲区缓存的，也就是说，每次请求读字节时都会使得操作系统再分发一个字节。相比之下，请求一个数据块并将其置于缓冲区会显得更加高效。如果我们想使用缓冲机制，以及用于文件的数据输入流，那么就需要使用下面这种相当恐怖的构造器序列：</p>
 <pre class="line-numbers language-java"><code class="language-java">DataInputStream din <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DataInputStream</span><span class="token punctuation">(</span>

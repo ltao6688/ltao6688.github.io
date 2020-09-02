@@ -817,7 +817,7 @@ OutputStream 实现了 Closeable 和 Flushable 接口，代表着可关闭，可
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="OutputStream"><a href="#OutputStream" class="headerlink" title="OutputStream"></a>OutputStream</h1><p>OutputStream 继承关系图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://s1.ax1x.com/2020/08/31/dXWMk9.png" alt="dXWMk9.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ltao6688/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://raw.githubusercontent.com/ltao6688/blogPic/master/blog/img/20200901215357.png" alt="继承关系图"></p>
 <p>OutputStream 实现了 Closeable 和 Flushable 接口，代表着可关闭，可冲刷。</p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">write</span><span class="token punctuation">(</span><span class="token keyword">int</span> b<span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true">// 写入一个字节，可以看到这里的参数是一个 int 类型，对应上面的读方法，int 类型的 32 位，只有低 // 8 位才写入，高 24 位将舍弃。</span>
