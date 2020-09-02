@@ -1,10 +1,10 @@
 [
   {
     "name": "背景图片3",
-    "cover": "背景图片/bg_pic_107.jpg",
+    "cover": "/blog/img/20200901222908.png",
     "description": "背景图片",
     "photos": [
-      "背景图片/bg_pic_101.jpg"
+      "/blog/img/20200901222908.png"
     ]
   }
 

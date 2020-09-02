@@ -164,7 +164,7 @@ jsDelivr:
 lazyload:
   enable: true 
   onlypost: true
-  loadingImg: https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg    # eg ./images/loading.gif
+  loadingImg: https://cdn.jsdelivr.net/gh/ltao6688/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg    # eg ./images/loading.gif
 
 #  动漫人物
 live2d:

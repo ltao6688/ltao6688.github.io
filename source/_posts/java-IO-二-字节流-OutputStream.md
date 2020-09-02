@@ -19,7 +19,7 @@ categories:
 
 OutputStream 继承关系图
 
-![类继承图](https://s1.ax1x.com/2020/08/31/dXWMk9.png)
+![继承关系图](https://raw.githubusercontent.com/ltao6688/blogPic/master/blog/img/20200901215357.png)
 
 OutputStream 实现了 Closeable 和 Flushable 接口，代表着可关闭，可冲刷。
 

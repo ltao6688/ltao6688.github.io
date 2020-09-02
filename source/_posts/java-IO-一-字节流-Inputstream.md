@@ -42,7 +42,7 @@ categories:
 
 来看一下类的继承图：
 
-[![类继承图](https://s1.ax1x.com/2020/08/31/dXWUTH.png)](https://imgchr.com/i/dXWUTH)
+![类的继承图](https://raw.githubusercontent.com/ltao6688/blogPic/master/blog/img/20200901222908.png)
 
 
 
