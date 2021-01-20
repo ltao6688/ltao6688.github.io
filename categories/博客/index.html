@@ -678,19 +678,28 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 
                 
                 
-                <a href="/categories/博客/" title="博客: 1">
+                <a href="/categories/java-IO/" title="java-IO: 2">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F9EBEA;">博客
+                             chip-default "
+                            style="background-color: #F9EBEA;">java-IO
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/mysql/" title="mysql: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F5EEF8;">mysql
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/java-IO/" title="java-IO: 2">
+                <a href="/categories/博客/" title="博客: 2">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">java-IO
+                             chip-active "
+                            style="background-color: #D5F5E3;">博客
                         <span class="tag-length">2</span>
                     </span>
                 </a>
@@ -705,6 +714,58 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
     <article id="articles" class="container articles">
         <div class="row tags-posts">
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2020/12/06/github-bo-ke-zi-ding-yi-yu-ming-shi-xiao/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="github博客自定义域名失效">
+                            
+                            <span class="card-title">github博客自定义域名失效</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                每次发布文章到博客 配置的域名便会失效解决办法方法一只要在source 目录添加一个新文件CNAME就好
+CNAME –不带任何后缀，这就是全称，里面写的是你的域名
+方法二安装插件 npm install hexo-generator-cn
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-12-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/博客/" class="post-category" target="_blank">
+                                    博客
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/博客/" target="_blank">
+                            <span class="chip bg-color">博客</span>
+                        </a>
+                        
+                        <a href="/tags/hexo/" target="_blank">
+                            <span class="chip bg-color">hexo</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
@@ -743,12 +804,12 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/hexo/" target="_blank">
-                            <span class="chip bg-color">hexo</span>
-                        </a>
-                        
                         <a href="/tags/博客/" target="_blank">
                             <span class="chip bg-color">博客</span>
+                        </a>
+                        
+                        <a href="/tags/hexo/" target="_blank">
+                            <span class="chip bg-color">hexo</span>
                         </a>
                         
                     </div>
@@ -787,7 +848,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">4k</span> 字
+                <span class="white-color">4.9k</span> 字
             
 
             
@@ -979,7 +1040,7 @@ $(function () {
                 })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
                     "//widget.daovoice.io/widget/6984b559.js", "daovoice")
                 daovoice('init', {
-                    app_id: "5c8c2289"
+                    app_id: "xxxx"
                 });
                 daovoice('update');
             </script>
