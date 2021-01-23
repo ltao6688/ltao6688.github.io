@@ -1,0 +1,187 @@
+# shw2018 洪卫  modify 2019.08.01
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 星辰大海👁
+subtitle: 路漫漫其修远兮，吾将上下而求索
+description: 呵呵
+keywords: 技术笔记 生活随笔
+author: 方玲涛
+language: zh-CN
+timezone:
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+# url:
+url: ltao6688.github.io
+permalink: :year/:month/:day/:title/
+root: /
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0
+render_drafts: false
+post_asset_folder: true
+relative_link: false
+future: true
+highlight:
+  enable: false
+  line_number: false
+  auto_detect: false
+  tab_replace:
+
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'tomorrow'
+  line_number: true    # default false
+  custom_css: 
+
+search:
+  path: search.xml
+  field: post
+
+permalink_pinyin:
+  enable: true
+  separator: '-' # default: '-'
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+
+Plugins:
+- hexo-generator-baidu-sitemap
+- hexo-generator-sitemap
+
+baidusitemap:
+    path: baidusitemap.xml
+sitemap:
+    path: sitemap.xml
+  
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 12
+  order_by: -date
+  
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 12
+pagination_dir: page
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: matery
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+- type: git
+  repo:
+    github: git@github.com:ltao6688/ltao6688.github.io.git
+    # coding: ltao6688.github.io
+    # gitee: ltao6688.github.io
+  branch: master
+- type: baidu_url_submitter
+
+# baidu submit
+baidu_url_submit:
+  count: 80                                      # 提交最新的一个链接
+  host: ltao6688.github.io     # 在百度站长平台中注册的域名
+  token: XXXXXXXXXXXXXXX    # 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
+  path: baidu_urls.txt                # 文本文档的地址， 新链接会保存在此文本文档里
+
+   
+githubEmojis:
+  enable: true
+  className: github-emoji
+  inject: true
+  styles:
+    # font-size: 5em
+    # font-weight: bold
+  customEmojis:
+
+# CDN访问加速
+# 第一次使用本功能，一定要先配置url，再`hexo cl && hexo g && hexo d`部署到GitHub的仓库，注意！必须是GitHub的仓库！
+# 如果必须要使用国内的coding或者gitee，可以采用双部署，同时将网站部署到两个仓库（其中一个必须是GitHub的仓库）
+# URL配置规则（例子如下）： https://cdn.jsdelivr.net/gh/你的GitHub用户名/你的仓库名
+# 如果想关闭此功能，将 url地址 注释或删除即可！
+#
+# 注：配置了此项，就代表着本地调试的时候，网站依然会去GitHub请求资源（原来的资源），本地调试的时候记得将 此项配置 注释或者删除掉
+# 更多关于访问速度优化，请查看：https://blog.sky03.cn/posts/42790.html
+jsDelivr:
+  url: https://cdn.jsdelivr.net/gh/ltao6688/ltao6688.github.io.git
+
+# marked:
+#   gfm: true
+#   pedantic: false
+#   breaks: true
+#   smartLists: true
+#   smartypants: true
+#   modifyAnchors: ''
+#   autolink: true
+#   sanitizeUrl: false
+#   headerIds: true
+
+# lazyload configuration  2019.08.14
+lazyload:
+  enable: true 
+  onlypost: true
+  loadingImg: https://cdn.jsdelivr.net/gh/ltao6688/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg    # eg ./images/loading.gif
+
+#  动漫人物
+live2d:
+  enable: true
+  scriptFrom: local
+  pluginRootPath: live2dw/
+  pluginJsPath: lib/
+  pluginModelPath: assets/
+  tagMode: false
+  log: false
+  model:
+    use: live2d-widget-model-shizuku
+  display:
+    position: left
+    width: 150
+    height: 300
+  mobile:
+    show: false
+  react:
+    opacity: 0.7
