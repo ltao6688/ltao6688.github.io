@@ -6,10 +6,10 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="标签: 源码分析, 技术笔记 生活随笔">
+    <meta name="keywords" content="背景图片3, 技术笔记 生活随笔">
     <meta name="baidu-site-verification" content="fmlEuI34ir">
     <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY">
-    <meta name="description" content="标签: 源码分析 | 星辰大海👁">
+    <meta name="description" content="背景图片3 | 星辰大海👁">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>标签: 源码分析 | 星辰大海👁</title>
+    <title>背景图片3 | 星辰大海👁</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -629,176 +629,76 @@
 
 </header>
 
-        <div class="bg-cover pd-header about-cover">
+        <link rel="stylesheet" href="/css/gallery.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container">
-    <div class="row">
-    <!-- 修改 2020.7.7 玲涛 原值 class="col s10 offset-s1 m8 offset-m2 l8 offset-l2" -->
-     <div class="col s12  m12  l12">
-        <div class="brand">
-            <div class="title center-align">
-                <!-- 
-                    路漫漫其修远兮，吾将上下而求索
-                 -->
-                
-                    标签
-                
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        背景图片3
+                    </div>
+                </div>
             </div>
-
-            <div class="description center-align">
-                
-                    <!-- 呵呵 -->
-                    <span id="jinrishici-sentence">正在加载今日诗词...</span>
-                
-            </div>
-            
-            
         </div>
     </div>
 </div>
+
+
+
+<!--   "  <p class=\"photo-name\">" + photo + "</p>\n" +
+文件名先注释掉  -->
+
+<!-- 不加密写法 -->
+<!-- <div class="container">
+    <div class="photo-wrapper">
+        <div class="waterfall" id="mygallery">
+            <a href="https://raw.githubusercontent.com/ltao6688/blogPic/master/blog/img/20200901222908.png"
+     class="photo-item" rel="example_group"
+     data-fancybox="images">
+      <img src="https://raw.githubusercontent.com/ltao6688/blogPic/master/blog/img/20200901222908.png"
+       alt=/blog/img/20200901222908.png>
+    </a>
+        </div>
+    </div>
+</div> -->
+
+<!-- 洪卫 shw2018  modify  2019.08.29  -->
+<!-- 加密写法 -->
+<div class="container">
+    <div class="photo-wrapper">
+        
+            <div class="waterfall" id="encrypt-blog">
+                <a href="https://raw.githubusercontent.com/ltao6688/blogPic/master/blog/img/20200901222908.png"
+     class="photo-item" rel="example_group"
+     data-fancybox="images">
+      <img src="https://raw.githubusercontent.com/ltao6688/blogPic/master/blog/img/20200901222908.png"
+       alt=/blog/img/20200901222908.png>
+    </a>
+            </div>
+        
+    </div>
+</div>
+
+<script src="/libs/lazyload/jquery.lazyload.js"></script>
+<script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
 <script>
-// 每天切换 banner 图.  Switch banner image every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+  // $(".waterfall").lazyload();
+
+$("a[rel=example_group]").fancybox();
+//  不加密写法
+// $("#mygallery").justifiedGallery({margins: 5, rowHeight: 150});
+$("#encrypt-blog").justifiedGallery({margins: 5, rowHeight: 150});
+
 </script>
-
-
-    </div>
-</div>
-
-<main class="content">
-
-    
-
-<div id="tags" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fa fa-tags"></i>&nbsp;&nbsp;文章标签
-            </div>
-            <div class="tag-chips">
-                
-                
-                <a href="/tags/博客/" title="博客: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="博客" style="background-color: #F9EBEA;">博客
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/hexo/" title="hexo: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="hexo" style="background-color: #F5EEF8;">hexo
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/后端/" title="后端: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="后端" style="background-color: #D5F5E3;">后端
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/io流/" title="io流: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="io流" style="background-color: #E8F8F5;">io流
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/源码分析/" title="源码分析: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="源码分析" style="background-color: #FEF9E7;">源码分析
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="io流, 源码分析" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2020/08/31/java-io-er-zi-jie-liu-outputstream/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="java IO(二) 字节流 OutputStream">
-                            
-                            <span class="card-title">java IO(二) 字节流 OutputStream</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-08-31
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/java-IO/" class="post-category" target="_blank">
-                                java-IO
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="io流, 源码分析" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2020/08/08/java-io-yi-zi-jie-liu-inputstream/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="java IO(一) 字节流 Inputstream">
-                            
-                            <span class="card-title">java IO(一) 字节流 Inputstream</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-08-08
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/java-IO/" class="post-category" target="_blank">
-                                java-IO
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </article>
-</main>
-
 
         <footer class="page-footer bg-color">
     <div class="container row center-align">
@@ -826,7 +726,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">4.9k</span> 字
+                <span class="white-color">4k</span> 字
             
 
             
