@@ -237,13 +237,13 @@ mySkills:
       percent: 80%
     Python:
       background: 'linear-gradient(to right, #2196F3 0%, #42A5F5 100%)'
-      percent: 50%
+      percent: 40%
     HTML:
       background: 'linear-gradient(to right, #FFEB3B 0%, #FFF176 100%)'
-      percent: 50%
+      percent: 40%
     javaScript:
       background: 'linear-gradient(to right, #FF0066 0%, #FF00CC 100%)'
-      percent: 50%
+      percent: 40%
 #    算法:
 #      background: 'linear-gradient(to right, #FF0066 0%, #FF00CC 100%)'
 #      percent: 50%
@@ -283,7 +283,7 @@ gitalk:
     clientId: XXXXXXXXXXXXXXXXXXXXXXXXXXXX
     clientSecret: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   admin:
-    - shw2018
+    - ltao
 
 # the Gitment config，default disabled
 # Gitment 评论模块的配置，默认为不激活
