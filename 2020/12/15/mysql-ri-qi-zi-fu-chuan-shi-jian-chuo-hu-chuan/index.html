@@ -6,12 +6,10 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="java IO(一) 字节流 Inputstream, 技术笔记 生活随笔">
+    <meta name="keywords" content="mysql 日期 字符串 时间戳互传, 技术笔记 生活随笔">
     <meta name="baidu-site-verification" content="fmlEuI34ir">
     <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY">
-    <meta name="description" content="Java IO 概述分类：1．java.io 包中阻塞型 IO；
-2．java.nio 包中的非阻塞型 IO，通常称为 New IO。这里只考虑到 java.io 包中阻塞型 IO
-在 JDK 中1.8 的版本中，该目录下共有 86 个类(">
+    <meta name="description" content="mysql 日期 字符串 时间戳互传平时比较常用的时间、字符串、时间戳之间的互相转换，虽然常用但是几乎每次使用时候都喜欢去搜索一下用法；本文将作为一个笔记，整理一下三者之间的 转换（即：date转字符串、date转时间戳、字符串转date、">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>java IO(一) 字节流 Inputstream | 星辰大海👁</title>
+    <title>mysql 日期 字符串 时间戳互传 | 星辰大海👁</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -648,13 +646,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        java IO(一) 字节流 Inputstream
+                        mysql 日期 字符串 时间戳互传
                     </div>
                 </div>
             </div>
@@ -764,12 +762,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/后端/" target="_blank">
+                                <span class="chip bg-color">后端</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/mysql/" class="post-category" target="_blank">
+                                mysql
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -777,7 +788,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-08-08
+                    2020-12-15
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -791,14 +802,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.1k
+                        641
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        8 分
+                        2 分
                     </div>
                     
                 
@@ -815,158 +826,50 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Java-IO-概述分类："><a href="#Java-IO-概述分类：" class="headerlink" title="Java IO 概述分类："></a>Java IO 概述分类：</h1><p>1．java.io 包中阻塞型 IO；</p>
-<p>2．java.nio 包中的非阻塞型 IO，通常称为 New IO。这里只考虑到 java.io 包中阻塞型 IO</p>
-<p>在 JDK 中1.8 的版本中，该目录下共有 86 个类(或接口)。以下是整个 IO 体系的简单分类：</p>
-<p>从数据传输方式或者说是运输方式角度看，可以将 IO 类分为:</p>
-<ul>
-<li>读写字节：InputStream 和 OutputStream</li>
-<li>读写字符(Unicode)：Reader 和 Writer</li>
-</ul>
-<p>在了解这几个类之前，我们先搞清楚 Java 中的字符与字节的关系。</p>
-<h2 id="Char占几个字节？"><a href="#Char占几个字节？" class="headerlink" title="Char占几个字节？"></a>Char占几个字节？</h2><p>之前在 String 源码中分析过，JDK8 中 String 类用的是 char 数组来存储字符值的，到 JDK9 才开始用 byte 数组来存储。这里有一个问题，在 Java 中的 char 究竟占几个字节？毕竟 c++ 中的 char 只占一个字节。对于 char 这个类型，在 Java 中是用来表示字符的，可是世界上有那么多字符，如果有一个char 只用一个字节来表示，那么就意味着只能存储 256 种，显然不合适，而如果有两个字节，那么就可以存储 65536 种。这个数量符合大多数国家的语言字符的个数。于是 Java 团队默认使用 unicode作为编码，一个 char 作为 2 字节来存储。 这里就有两个问题了：</p>
-<ul>
-<li>java的char一定会有两个字节吗?</li>
-<li>中文字符可以存储在char里面吗?</li>
-</ul>
-<p>先来回答第一个问题。char 一定是两个字节吗?不是的，这个跟我们选用的字符编码有关，如果采用 ”ISO-8859-1” 编码，那么一个 char 只会有一个字节。如果采用 ”UTF-8” 或者  “GB2312”、“GBK”  等编码格式呢?这几种编码格式采用的是动态长度的，如果是英文字符，大家都是一个字节。如果是中文，”UTF-8” 是三个字，而  ”GBK”  和  ”GB2312”  是两个字节。而对于  ”unicode”  而言，无论如何都是两个字节。 然后再回答第二个问题，对于一个 char 如果用  ”ISO-8859-1”  来存储的话，肯定无法存储一个中文，而对于 ”UTF-8”、“GB2312”、“GBK”  而言大多数中文字符是可以存储的。</p>
-<h1 id="InputStream"><a href="#InputStream" class="headerlink" title="InputStream"></a>InputStream</h1><p>来看一下类的继承图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ltao6688/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://raw.githubusercontent.com/ltao6688/blogPic/master/blog/img/20200901222908.png" alt="类的继承图"></p>
-<p>事实上，由于 InputStream 是整个继承体系中的顶层类，同时根据数据源的不同，每一种数据源都从InputStream 派生了子类，导致了整个 IO 体系的庞大。但是，虽然整个继承体系很庞大，它还是有迹可循的。做过关于IO操作的读者知道，我们很少单独使用哪个类来实现 IO 操作，平时都是几个类合起来使用，这其实体现了一种装饰器模式 (<em>Decorator pattern</em>)。</p>
-<p>例如，输入流在默认情况下是不被缓冲区缓存的，也就是说，每次请求读字节时都会使得操作系统再分发一个字节。相比之下，请求一个数据块并将其置于缓冲区会显得更加高效。如果我们想使用缓冲机制，以及用于文件的数据输入流，那么就需要使用下面这种相当恐怖的构造器序列：</p>
-<pre class="line-numbers language-java"><code class="language-java">DataInputStream din <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DataInputStream</span><span class="token punctuation">(</span>
-                            <span class="token keyword">new</span> <span class="token class-name">BufferedInputStream</span><span class="token punctuation">(</span>
-                                <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"test.txt"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>这样确实显得很麻烦，但是却带来了极大的灵活性，健壮优美符合设计模式(~~最啰嗦的语言，没有之一)。不多说了，我们还是继续看源码吧:)</p>
-<p>InputStream 类</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">int</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// 读取数据 具体子类实现</span>
+                <h1 id="mysql-日期-字符串-时间戳互传"><a href="#mysql-日期-字符串-时间戳互传" class="headerlink" title="mysql 日期 字符串 时间戳互传"></a>mysql 日期 字符串 时间戳互传</h1><p>平时比较常用的时间、字符串、时间戳之间的互相转换，虽然常用但是几乎每次使用时候都喜欢去搜索一下用法；本文将作为一个笔记，整理一下三者之间的 转换（即：date转字符串、date转时间戳、字符串转date、字符串转时间戳、时间戳转date，时间戳转字符串）用法，方便日后查看；</p>
+<h3 id="涉及的函数"><a href="#涉及的函数" class="headerlink" title="涉及的函数"></a>涉及的函数</h3><pre class="line-numbers language-sql"><code class="language-sql">date_format<span class="token punctuation">(</span><span class="token keyword">date</span><span class="token punctuation">,</span> format<span class="token punctuation">)</span> 函数，MySQL日期格式化函数date_format<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token keyword">byte</span> b<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">/** 
-    将读取到的数据放在 byte 数组中，实际上是调用 read(byte b[], int off, int len)，并将     偏移量与读取长度设置为 0。在真正被调用的 read(byte[], int, int)中，会调用第一行的抽象      read() 方法，该抽象方法会被子类实现。
-*/</span>
+unix_timestamp<span class="token punctuation">(</span><span class="token punctuation">)</span> 函数
 
-<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token keyword">byte</span> b<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> off<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// 从第 off 位置读取 len 长度字节的数据放到 byte 数组中，流是以 -1 来判断是否读取结束的</span>
+str_to_date<span class="token punctuation">(</span>str<span class="token punctuation">,</span> format<span class="token punctuation">)</span> 函数
 
-<span class="token keyword">public</span> <span class="token keyword">long</span> <span class="token function">skip</span><span class="token punctuation">(</span><span class="token keyword">long</span> n<span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// 跳过指定个数的字节不读取，想想看电影跳过片头片尾</span>
-
-<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">available</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// 返回可读的字节数量</span>
-
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// 读取完，关闭流，释放资源</span>
-
-<span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">mark</span><span class="token punctuation">(</span><span class="token keyword">int</span> readlimit<span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// 标记读取位置，下次还可以从这里开始读取，使用前要看当前流是否支持，可以使用 markSupport() 方法判断</span>
-
-<span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// 重置读取位置为上次 mark 标记的位置</span>
-
-<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">markSupported</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// 判断当前流是否支持标记流，和上面两个方法配套使用</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">InputStream</span> <span class="token keyword">implements</span> <span class="token class-name">Closeable</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> SKIP_BUFFER_SIZE <span class="token operator">=</span> <span class="token number">2048</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//用于skip方法，和skipBuffer相关</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> skipBuffer<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// skipBuffer is initialized in skip(long), if needed.</span>
-
-    <span class="token comment" spellcheck="true">//从输入流中读取下一个字节，</span>
-    <span class="token comment" spellcheck="true">//正常返回0-255，到达文件的末尾返回-1</span>
-    <span class="token comment" spellcheck="true">//在流中还有数据，但是没有读到时该方法会阻塞(block)</span>
-    <span class="token comment" spellcheck="true">//Java IO和New IO的区别就是阻塞流和非阻塞流</span>
-    <span class="token comment" spellcheck="true">//抽象方法！不同的子类不同的实现！</span>
-    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">int</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException<span class="token punctuation">;</span>  
-
-    <span class="token comment" spellcheck="true">//将流中的数据读入放在byte数组的第off个位置先后的len个位置中</span>
-    <span class="token comment" spellcheck="true">//放回值为放入字节的个数。</span>
-    <span class="token comment" spellcheck="true">//这个方法在利用抽象方法read，某种意义上简单的Templete模式。</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token keyword">byte</span> b<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> off<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//检查输入是否正常。一般情况下，检查输入是方法设计的第一步</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>    
-            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>off <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> len <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> len <span class="token operator">></span> b<span class="token punctuation">.</span>length <span class="token operator">-</span> off<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IndexOutOfBoundsException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-             <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>        
-        <span class="token comment" spellcheck="true">//读取下一个字节</span>
-        <span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//到达文件的末端返回-1</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>   <span class="token punctuation">}</span>
-        <span class="token comment" spellcheck="true">//放回的字节downcast                           </span>
-        b<span class="token punctuation">[</span>off<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">)</span>c<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//已经读取了一个字节                                                   </span>
-        <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>                                                                        
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">//最多读取len个字节，所以要循环len次</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len <span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token comment" spellcheck="true">//每次循环从流中读取一个字节</span>
-                <span class="token comment" spellcheck="true">//由于read方法阻塞，</span>
-                <span class="token comment" spellcheck="true">//所以read(byte[],int,int)也会阻塞</span>
-                c <span class="token operator">=</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token comment" spellcheck="true">//到达末尾，理所当然放回-1                                       </span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>            <span class="token keyword">break</span><span class="token punctuation">;</span>           <span class="token punctuation">}</span> 
-                <span class="token comment" spellcheck="true">//读到就放入byte数组中</span>
-                b<span class="token punctuation">[</span>off <span class="token operator">+</span> i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">)</span>c<span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> ee<span class="token punctuation">)</span> <span class="token punctuation">{</span>     <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> i<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-     <span class="token comment" spellcheck="true">//利用上面的方法read(byte[] b)</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token keyword">byte</span> b<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token function">read</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> b<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">}</span>                          
-    <span class="token comment" spellcheck="true">//方法内部使用的、表示要跳过的字节数目，</span>
-     <span class="token keyword">public</span> <span class="token keyword">long</span> <span class="token function">skip</span><span class="token punctuation">(</span><span class="token keyword">long</span> n<span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span>
-        <span class="token keyword">long</span> remaining <span class="token operator">=</span> n<span class="token punctuation">;</span>    
-        <span class="token keyword">int</span> nr<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>skipBuffer <span class="token operator">==</span> null<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true">//初始化一个跳转的缓存</span>
-        skipBuffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span>SKIP_BUFFER_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>                   
-        <span class="token comment" spellcheck="true">//本地化的跳转缓存</span>
-        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> localSkipBuffer <span class="token operator">=</span> skipBuffer<span class="token punctuation">;</span>          
-        <span class="token comment" spellcheck="true">//检查输入参数，应该放在方法的开始                            </span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span>                             
-        <span class="token comment" spellcheck="true">//一共要跳过n个，每次跳过部分，循环       </span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>remaining <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>                                      
-            nr <span class="token operator">=</span> <span class="token function">read</span><span class="token punctuation">(</span>localSkipBuffer<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>SKIP_BUFFER_SIZE<span class="token punctuation">,</span> remaining<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//利用上面的read(byte[],int,int)方法尽量读取n个字节  </span>
-            <span class="token comment" spellcheck="true">//读到流的末端，则返回</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>nr <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token keyword">break</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>
-            <span class="token comment" spellcheck="true">//没有完全读到需要的，则继续循环</span>
-            remaining <span class="token operator">-=</span> nr<span class="token punctuation">;</span>                                       
-        <span class="token punctuation">}</span>       
-        <span class="token keyword">return</span> n <span class="token operator">-</span> remaining<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回时要么全部读完，要么因为到达文件末端，读取了部分</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">//查询流中还有多少可以读取的字节</span>
-    <span class="token comment" spellcheck="true">//该方法不会block。在java中抽象类方法的实现一般有以下几种方式: </span>
-    <span class="token comment" spellcheck="true">//1.抛出异常(java.util)；2.“弱”实现。像上面这种。子类在必要的时候覆盖它。</span>
-    <span class="token comment" spellcheck="true">//3.“空”实现。</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">available</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span>           
-        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">//关闭当前流、同时释放与此流相关的资源</span>
-    <span class="token comment" spellcheck="true">//关闭当前流、同时释放与此流相关的资源</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span><span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">//markSupport可以查询当前流是否支持mark</span>
-    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">mark</span><span class="token punctuation">(</span><span class="token keyword">int</span> readlimit<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">//对mark过的流进行复位。只有当流支持mark时才可以使用此方法。</span>
-    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span>
-
-                   <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IOException</span><span class="token punctuation">(</span><span class="token string">"mark/reset not supported"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">//查询是否支持mark</span>
-    <span class="token comment" spellcheck="true">//绝大部分不支持，因此提供默认实现，返回false。子类有需要可以覆盖。</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">markSupported</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>           
-        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>字节输入流必须提供返回下一个输入字节的 read() 方法。因为所有字节输入流的父类 InputStream 有这样一个抽象方法：public abstract int read()。</p>
-<p><a href="https://zhuanlan.zhihu.com/p/65645107" target="_blank" rel="noopener">参考文章</a></p>
+from_unixtime<span class="token punctuation">(</span>unix_timestamp<span class="token punctuation">,</span> format<span class="token punctuation">)</span> 函数，MySQL时间戳格式化函数from_unixtime<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="时间转字符串"><a href="#时间转字符串" class="headerlink" title="时间转字符串"></a>时间转字符串</h3><p>`<br>select date_format(now(), ‘%Y-%m-%d’);</p>
+<p>结果：2020-12-15<br>`</p>
+<h3 id="时间转时间戳"><a href="#时间转时间戳" class="headerlink" title="时间转时间戳"></a>时间转时间戳</h3><p><code>select unix_timestamp(now());</code></p>
+<p><code>//结果：1608041813</code></p>
+<h3 id="字符串转时间戳"><a href="#字符串转时间戳" class="headerlink" title="字符串转时间戳"></a>字符串转时间戳</h3><p>`select unix_timestamp(‘2020-12-15’);</p>
+<p> <code>//结果：1608041813</code></p>
+<h3 id="时间戳转时间"><a href="#时间戳转时间" class="headerlink" title="时间戳转时间"></a>时间戳转时间</h3><p><code>select from_unixtime(1608041813);</code></p>
+<p><code>//结果：2020-12-15 20:45:24</code></p>
+<h3 id="时间戳转字符串"><a href="#时间戳转字符串" class="headerlink" title="时间戳转字符串"></a>时间戳转字符串</h3><p><code>select from_unixtime(1608041813,'%Y-%d');</code></p>
+<p><code>//结果：2020-12-15 20:45:24</code></p>
+<h1 id="附表"><a href="#附表" class="headerlink" title="附表"></a>附表</h1><h3 id="MySQL日期格式化（format）取值范围。"><a href="#MySQL日期格式化（format）取值范围。" class="headerlink" title="MySQL日期格式化（format）取值范围。"></a>MySQL日期格式化（format）取值范围。</h3><pre class="line-numbers language-sql"><code class="language-sql">值   含义
+秒   <span class="token operator">%</span>S、<span class="token operator">%</span>s   两位数字形式的秒（ <span class="token number">00</span><span class="token punctuation">,</span><span class="token number">01</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">59</span>）
+分   <span class="token operator">%</span>I、<span class="token operator">%</span>i   两位数字形式的分（ <span class="token number">00</span><span class="token punctuation">,</span><span class="token number">01</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">59</span>）
+小时  <span class="token operator">%</span>H  <span class="token number">24</span>小时制，两位数形式小时（<span class="token number">00</span><span class="token punctuation">,</span><span class="token number">01</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token number">23</span>）
+<span class="token operator">%</span>h  <span class="token number">12</span>小时制，两位数形式小时（<span class="token number">00</span><span class="token punctuation">,</span><span class="token number">01</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token number">12</span>）
+<span class="token operator">%</span>k  <span class="token number">24</span>小时制，数形式小时（<span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token number">23</span>）
+<span class="token operator">%</span>l  <span class="token number">12</span>小时制，数形式小时（<span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token number">12</span>）
+<span class="token operator">%</span>T  <span class="token number">24</span>小时制，时间形式（HH:mm:ss）
+<span class="token operator">%</span>r   <span class="token number">12</span>小时制，时间形式（hh:mm:ss AM 或 PM）
+<span class="token operator">%</span>p  AM上午或PM下午
+  周      <span class="token operator">%</span>W 一周中每一天的名称（Sunday<span class="token punctuation">,</span>Monday<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span>Saturday）
+ <span class="token operator">%</span><span class="token number">a</span> 一周中每一天名称的缩写（Sun<span class="token punctuation">,</span>Mon<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span>Sat）
+<span class="token operator">%</span>w  以数字形式标识周（<span class="token number">0</span><span class="token operator">=</span>Sunday<span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">=</span>Monday<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token operator">=</span>Saturday）
+<span class="token operator">%</span>U  数字表示周数，星期天为周中第一天
+<span class="token operator">%</span>u  数字表示周数，星期一为周中第一天
+天   <span class="token operator">%</span><span class="token number">d</span>  两位数字表示月中天数（<span class="token number">01</span><span class="token punctuation">,</span><span class="token number">02</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token number">31</span>）
+<span class="token operator">%</span><span class="token number">e</span>   数字表示月中天数（<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token number">31</span>）
+ <span class="token operator">%</span>D 英文后缀表示月中天数（1st<span class="token punctuation">,</span>2nd<span class="token punctuation">,</span>3rd <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>）
+ <span class="token operator">%</span>j 以三位数字表示年中天数（<span class="token number">001</span><span class="token punctuation">,</span><span class="token number">002</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token number">366</span>）
+月   <span class="token operator">%</span>M  英文月名（January<span class="token punctuation">,</span>February<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span>December）
+<span class="token operator">%</span><span class="token number">b</span>  英文缩写月名（Jan<span class="token punctuation">,</span>Feb<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token keyword">Dec</span>）
+<span class="token operator">%</span>m  两位数字表示月份（<span class="token number">01</span><span class="token punctuation">,</span><span class="token number">02</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token number">12</span>）
+<span class="token operator">%</span><span class="token number">c</span>  数字表示月份（<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span><span class="token number">12</span>）
+年   <span class="token operator">%</span>Y  四位数字表示的年份（<span class="token number">2015</span><span class="token punctuation">,</span><span class="token number">2016</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>）
+<span class="token operator">%</span>y   两位数字表示的年份（<span class="token number">15</span><span class="token punctuation">,</span><span class="token number">16</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>）
+文字输出    <span class="token operator">%</span>文字     直接输出文字内容<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1135,7 +1038,7 @@
                     </span>
                     <a href="ltao6688.github.io" class="b-link-green">星辰大海👁</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2020/08/08/java-io-yi-zi-jie-liu-inputstream/" class="b-link-green">java IO(一) 字节流 Inputstream</a>
+                    <a href="/2020/12/15/mysql-ri-qi-zi-fu-chuan-shi-jian-chuo-hu-chuan/" class="b-link-green">mysql 日期 字符串 时间戳互传</a>
                 </p>
             </div>
 
@@ -1455,36 +1358,50 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/08/31/java-io-er-zi-jie-liu-outputstream/">
+                <a href="/2020/12/15/mysql-ri-qi-zi-fu-chuan-shi-jian-chuo-hu-chuan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="java IO(二) 字节流 OutputStream">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="mysql 日期 字符串 时间戳互传">
                         
-                        <span class="card-title">java IO(二) 字节流 OutputStream</span>
+                        <span class="card-title">mysql 日期 字符串 时间戳互传</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            OutputStreamOutputStream 继承关系图
-
-OutputStream 实现了 Closeable 和 Flushable 接口，代表着可关闭，可冲刷。
-方法public abstract void write(int b
+                            mysql 日期 字符串 时间戳互传平时比较常用的时间、字符串、时间戳之间的互相转换，虽然常用但是几乎每次使用时候都喜欢去搜索一下用法；本文将作为一个笔记，整理一下三者之间的 转换（即：date转字符串、date转时间戳、字符串转date、
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-08-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-12-15
+                            </span>
                         <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/mysql/" class="post-category" target="_blank">
+                                    mysql
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/后端/" target="_blank">
+                        <span class="chip bg-color">后端</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -1496,24 +1413,26 @@ OutputStream 实现了 Closeable 和 Flushable 接口，代表着可关闭，可
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/08/03/hexo-github-da-jian-bo-ke/">
+                <a href="/2020/12/06/github-bo-ke-zi-ding-yi-yu-ming-shi-xiao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="hexo + github 搭建博客">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="github博客自定义域名失效">
                         
-                        <span class="card-title">hexo + github 搭建博客</span>
+                        <span class="card-title">github博客自定义域名失效</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前言受够了第在第三方网站时充斥着各种广告，偶然间了解到了 Hexo 这个静态博客网站，很适合用来写作, 记录笔记,最重要的是它是免费的，里面有许多的博客主题模板，这些主题都是一些很牛的大佬们开发的，而且设计的主题都很棒，看着让我很喜欢，于是
+                            每次发布文章到博客 配置的域名便会失效解决办法方法一只要在source 目录添加一个新文件CNAME就好
+CNAME –不带任何后缀，这就是全称，里面写的是你的域名
+方法二安装插件 npm install hexo-generator-cn
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-08-03
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-12-06
                             </span>
                         <span class="publish-author">
                             
