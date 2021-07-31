@@ -1,0 +1,122 @@
+<style type="text/css">
+    /** add 2020.07.07 玲涛 */
+    .bg-cover .brand {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 2.85em;
+        margin-bottom: 80px;
+        position: relative;
+        font-family: 'simhei';
+    }
+</style>
+
+<!-- 修改于 2020.07.07 玲涛 添加音乐盒，调整关于我信息和图表显示顺序 -->
+<link rel="stylesheet" href="<%- theme.libs.css.aplayer %>">
+<script src="<%- theme.libs.js.aplayer %>"></script>
+<%- partial('_partial/bg-cover') %>
+
+<%
+    var audiosJson = JSON.stringify(site.data.musics);
+%>
+<script>
+    $(function () {
+                    new APlayer({
+                        container: document.getElementById('aplayer'),
+                        fixed: '<%- theme.music.fixed %>' === 'true',
+                        autoplay: '<%- theme.music.autoplay %>' === 'true',
+                        theme: '<%- theme.music.theme %>',
+                        loop: '<%- theme.music.loop %>',
+                        order: '<%- theme.music.order %>',
+                        preload: '<%- theme.music.preload %>',
+                        volume: Number('<%- theme.music.volume %>'),
+                        listFolded: '<%- theme.music.about.listFolded %>' === 'true',
+                        listMaxHeight: '<%- theme.music.about.listMaxHeight %>',
+                        audio: JSON.parse('<%- audiosJson %>')
+                    });
+                });
+</script>
+
+<main class="content">
+
+    <div id="aboutme" class="container about-container">
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
+                        <%- partial('_partial/post-statis') %>
+                    </div>
+                    <div class="col s12 m12 l4">
+                        <div class="profile center-align">
+                            <div class="avatar">
+                                <img src="<%- theme.profile.avatar %>" alt="<%- config.author %>"
+                                    class="circle responsive-img avatar-img">
+                            </div>
+                            <div class="author">
+                                <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
+                                    <%- partial('_partial/post-statis') %>
+                                </div>
+                                <div class="title"><%- config.author %></div>
+                                <div class="career"><%- theme.profile.career %></div>
+                                <div class="social-link hide-on-large-only" data-aos="zoom-in-left">
+                                    <%- partial('_partial/social-link') %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l4 hide-on-med-and-down" data-aos="zoom-in-left">
+                        <div class="social-link">
+                            <%- partial('_partial/social-link') %>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="music-player">
+                <% if (theme.music.showTitle) { %>
+                <div class="title center-align">
+                    <i class="fa fa-music"></i>&nbsp;&nbsp;<%- theme.music.title %>
+                </div>
+                <% } %>
+                <div class="row">
+                    <%# 注释语法 原主题控件样式 %>
+                    <%# <div class="col l8 offset-l2 m10 offset-m1 s12"> %>
+                    <div class="col s12 ">
+                        <div id="aplayer" class="music"></div>
+                    </div>
+                </div>
+            </div>
+                <% if (theme.myCard && theme.myCard.enable) { %>
+                              <div class="card">
+                                         <div class="card-content">
+                                             <div class="card-content article-card-content">
+                                                     <div class="title center-align" data-aos="zoom-in-up">
+                                                        <!-- 修改于 注释 2020.7.7 玲涛 <i class="fa fa-address-book"></i>&nbsp;&nbsp;<%- __('myCV') %> !-->
+                                                     </div>
+                                                     <div id="articleContent" data-aos="fade-up">
+                                                         <%- page.content %>
+                                                     </div>
+                                             </div>
+                                         </div>
+                               </div>
+                    <% } %>
+
+                <div class="introduction center-align" data-aos="fade-up">
+                    <%= theme.profile.introduction %>
+                </div>
+
+                <%- partial('_widget/post-charts') %>
+
+                <% if (theme.myProjects && theme.myProjects.enable) { %>
+                <%- partial('_widget/my-projects') %>
+                <% } %>
+
+                <% if (theme.mySkills && theme.mySkills.enable) { %>
+                <%- partial('_widget/my-skills') %>
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+

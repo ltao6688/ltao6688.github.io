@@ -1,0 +1,16 @@
+<%- partial('_partial/bg-cover') %>
+
+<main class="content">
+         <!-- <%- partial('_widget/category-cloud') %> -->
+
+        <% if (site.tags && site.tags.length > 0) { %>
+        <%- partial('_widget/tag-wordcloud') %>
+        <% } %>
+    <!--
+        <%- partial('_widget/tag-cloud') %>
+        <% if (site.categories && site.categories.length > 0) { %>
+        <%- partial('_widget/category-radar') %>
+        <% } %>
+    -->
+        <%- partial('_widget/post-charts') %>
+</main>
